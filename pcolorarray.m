@@ -141,8 +141,17 @@ for iv = 1:nvar
     % Determine figure size needed to legibly show all cells
 
     hfigtemp = figure('visible', 'off');
-    htxt = cellfun(@(x) text(0,0,x, 'units', 'pixels', textprops{:}), vartext);
-    ext = cell2mat(get(htxt, 'extent'));
+    if verLessThan('matlab', '8.4.0')
+        htxt = cellfun(@(x) text(0,0,x, 'units', 'pixels', textprops{:}), vartext);
+        ext = cell2mat(get(htxt, 'extent'));
+    else
+        htxt = gobjects(size(vartext));
+        for ii = 1:numel(htxt)
+            htxt(ii) = text(0,0,vartext{ii},'units', 'pixels', textprops{:});
+        end
+        ext = cat(1, htxt.Extent);
+    end
+        
     delete(htxt);
     
     close(hfigtemp);
