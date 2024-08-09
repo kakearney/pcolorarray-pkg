@@ -76,7 +76,7 @@ elseif length(xyz) == 3
     y = xyz{2};
     z = xyz{3};
     
-    validateattributes(x, {'numeric'}, {'2d'}, 'pcolorpad', 'x');
+    validateattributes(x, {'numeric','datetime'}, {'2d'}, 'pcolorpad', 'x'); % TODO: make as flexible as pcolor
     validateattributes(y, {'numeric'}, {'2d'}, 'pcolorpad', 'y');
     validateattributes(z, {'numeric'}, {'2d'}, 'pcolorpad', 'c');
     
