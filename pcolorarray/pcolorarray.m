@@ -182,7 +182,9 @@ end
 
 % Adjust all figures to use the same colormap limits
 
-lims = cellfun(@minmax, vars, 'uni', 0);
+minmax = @(x) [min(x(:)) max(x(:))];
+
+lims = cellfun(minmax, vars, 'uni', 0);
 lims = cat(1, lims{:});
 lims = minmax(lims);
 if Options.center0
